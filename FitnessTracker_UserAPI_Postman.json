@@ -1,0 +1,178 @@
+{
+  "info": {
+    "name": "FitnessTracker User API FINAL v3",
+    "_postman_id": "abcdef12-3456-7890-abcd-1234567890ff",
+    "description": "Ostateczna wersja Postman dla pe\u0142nego API u\u017cytkownik\u00f3w (stabilna na zaliczenie)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User (unikalny email)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Filip\",\n  \"lastName\": \"Macek\",\n  \"birthdate\": \"1995-03-20\",\n  \"email\": \"filip.macek.lab02.test01@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User By ID (przyk\u0142ad id = 2)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update User (przyk\u0142ad id = 2)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Filip\",\n  \"lastName\": \"Modyfikacja\",\n  \"birthdate\": \"1993-08-12\",\n  \"email\": \"filip.zmieniony@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/users/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete User (przyk\u0142ad id = 2)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search by Email",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users/search?email=example",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "example"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search by Age",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users/age?minAge=30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "age"
+          ],
+          "query": [
+            {
+              "key": "minAge",
+              "value": "30"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

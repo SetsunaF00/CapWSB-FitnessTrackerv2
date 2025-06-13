@@ -55,4 +55,29 @@ public class Training {
         this.distance = distance;
         this.averageSpeed = averageSpeed;
     }
+
+    // DODANE SETTERY:
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setActivityType(ActivityType activityType) {
+        this.activityType = activityType;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
+    }
 }
