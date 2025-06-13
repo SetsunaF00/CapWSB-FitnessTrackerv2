@@ -1,0 +1,105 @@
+{
+  "info": {
+    "name": "FitnessTracker Training API LAB03",
+    "_postman_id": "lab03-training-api-001",
+    "description": "Kolekcja Postman do Laboratorium 03 - Training API (klasyczne DTO)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Training",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 1,\n  \"startTime\": \"2024-04-01T11:00:00\",\n  \"endTime\": \"2024-04-01T12:00:00\",\n  \"activityType\": \"RUNNING\",\n  \"distance\": 5.0,\n  \"averageSpeed\": 10.0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings"]
+        }
+      }
+    },
+    {
+      "name": "Get All Trainings",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings"]
+        }
+      }
+    },
+    {
+      "name": "Get Trainings By User",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Finished Trainings After Date",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings/finished/2024-05-01",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings", "finished", "2024-05-01"]
+        }
+      }
+    },
+    {
+      "name": "Get Trainings By Activity Type",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings/activityType?activityType=RUNNING",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings", "activityType"],
+          "query": [
+            { "key": "activityType", "value": "RUNNING" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Training",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"startTime\": \"2024-04-01T12:00:00\",\n  \"endTime\": \"2024-04-01T13:00:00\",\n  \"activityType\": \"TENNIS\",\n  \"distance\": 3.0,\n  \"averageSpeed\": 6.0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/v1/trainings/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["v1", "trainings", "1"]
+        }
+      }
+    }
+  ]
+}

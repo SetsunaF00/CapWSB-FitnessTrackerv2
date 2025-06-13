@@ -5,7 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.wsb.fitnesstracker.training.dto.TrainingDto;
+import pl.wsb.fitnesstracker.training.dto.TrainingCreateDto;
+import pl.wsb.fitnesstracker.training.dto.TrainingUpdateDto;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.training.service.TrainingService;
 
@@ -20,32 +21,32 @@ public class TrainingController {
     private final TrainingService trainingService;
 
     @GetMapping
-    public ResponseEntity<List<TrainingDto>> getAllTrainings() {
+    public ResponseEntity<List<?>> getAllTrainings() {
         return ResponseEntity.ok(trainingService.getAllTrainings());
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<TrainingDto>> getTrainingsByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<?>> getTrainingsByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(trainingService.getAllTrainingsByUser(userId));
     }
 
     @GetMapping("/finished/{afterTime}")
-    public ResponseEntity<List<TrainingDto>> getAllFinishedAfter(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate afterTime) {
+    public ResponseEntity<List<?>> getAllFinishedAfter(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate afterTime) {
         return ResponseEntity.ok(trainingService.getAllFinishedAfter(Date.valueOf(afterTime)));
     }
 
     @GetMapping("/activityType")
-    public ResponseEntity<List<TrainingDto>> getByActivityType(@RequestParam ActivityType activityType) {
+    public ResponseEntity<List<?>> getByActivityType(@RequestParam ActivityType activityType) {
         return ResponseEntity.ok(trainingService.getAllByActivityType(activityType));
     }
 
     @PostMapping
-    public ResponseEntity<TrainingDto> createTraining(@RequestBody TrainingDto dto) {
+    public ResponseEntity<?> createTraining(@RequestBody TrainingCreateDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(trainingService.createTraining(dto));
     }
 
     @PutMapping("/{trainingId}")
-    public ResponseEntity<TrainingDto> updateTraining(@PathVariable Long trainingId, @RequestBody TrainingDto dto) {
+    public ResponseEntity<?> updateTraining(@PathVariable Long trainingId, @RequestBody TrainingUpdateDto dto) {
         return ResponseEntity.ok(trainingService.updateTraining(trainingId, dto));
     }
 }
