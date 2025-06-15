@@ -72,7 +72,7 @@ public class UserApiIntegrationTest {
 
     @Test
     void shouldHandleUserNotFound() throws Exception {
-        mockMvc.perform(get("/api/users/{id}", 99999))
+        mockMvc.perform(get("/v1/users/{id}", 9999))
                 .andExpect(status().isNotFound());
     }
 }

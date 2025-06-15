@@ -1,4 +1,3 @@
-
 package pl.wsb.fitnesstracker.user.service;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,8 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final ExtendedUserRepository userRepository;
+
+    // STARE FUNKCJONALNOŚCI — LABOWE DTO
 
     public List<UserSummaryDto> getAllUsers() {
         return userRepository.findAll()
@@ -74,7 +75,63 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    // MAPOWANIE DTO
     private UserDetailsDto mapToDetailsDto(User user) {
         return new UserDetailsDto(user.getId(), user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getEmail());
+    }
+
+    // NOWE FUNKCJONALNOŚCI DLA TESTÓW INTEGRACYJNYCH
+
+    // pobierz pełną listę użytkowników (cała encja User)
+    public List<User> getAllUsersEntities() {
+        return userRepository.findAll();
+    }
+
+    // pobierz uproszczoną listę użytkowników (na potrzeby /v1/users/simple)
+    public List<UserSimpleDto> getAllUsersSimple() {
+        return userRepository.findAll()
+                .stream()
+                .map(user -> new UserSimpleDto(user.getFirstName(), user.getLastName()))
+                .collect(Collectors.toList());
+    }
+
+    // pobierz użytkownika po ID (pełna encja User)
+    public User getUserEntityById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
+    }
+
+    // pobierz użytkowników po emailu (pełna encja UserWithEmailDto dla listy)
+    public List<UserEmailDto> getUserByEmail(String email) {
+        return userRepository.findByEmailContainingIgnoreCase(email)
+                .stream()
+                .map(user -> new UserEmailDto(user.getId(), user.getEmail()))
+                .collect(Collectors.toList());
+    }
+
+    // pobierz użytkowników starszych niż podana data
+    public List<User> getUsersOlderThan(LocalDate date) {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getBirthdate().isBefore(date))
+                .collect(Collectors.toList());
+    }
+
+    // zapis nowego użytkownika (pełna encja User)
+    public void createUserEntity(User user) {
+        userRepository.save(user);
+    }
+
+    // aktualizacja użytkownika (pełna encja User)
+    public void updateUserEntity(Long id, User updatedUser) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        existingUser.setFirstName(updatedUser.getFirstName());
+        existingUser.setLastName(updatedUser.getLastName());
+        existingUser.setBirthdate(updatedUser.getBirthdate());
+        existingUser.setEmail(updatedUser.getEmail());
+
+        userRepository.save(existingUser);
     }
 }
